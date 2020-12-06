@@ -22,6 +22,13 @@ def save_pic(name_tif):
     png2.save(name_tif + '.tiff')
 
 
+def signal_to_noise(a, axis=0, ddof=0):
+    a = np.asanyarray(a)
+    m = a.mean(axis)
+    sd = a.std(axis=axis, ddof=ddof)
+    return np.where(sd == 0, 0, m / sd)
+
+
 i = 0
 
 while i != 0.0650:
@@ -44,8 +51,8 @@ while i != 0.0650:
         for y in range(jets.shape[0]):
             b, g, r = jets[y, x]
             lum = (0.2126 * r) + (0.7152 * g) + (0.0722 * b)
-            print("coordinates of: " + str(x) + " " + str(y) + " are: " + str(r) + " " + str(g) + " " + str(b)
-                  + " and luminance: " + str(lum))
+            # print("coordinates of: " + str(x) + " " + str(y) + " are: " + str(r) + " " + str(g) + " " + str(b)
+            #       + " and luminance: " + str(lum))
             lum_arr[x][y] = lum
 
     # show_me(jets, 'lab')
@@ -76,6 +83,13 @@ while i != 0.0650:
     axes = Axes3D(fig)
 
     axes.plot_surface(x, y, z)
+
+    axes.set_xlabel('X coordinate')
+    axes.set_ylabel('Y coordinate')
+    axes.set_zlabel('Luminance')
+    axes.text2D(0, 0.95, "Luminance for Z = " + str(i), transform=axes.transAxes)
+    axes.text2D(0, 0.90, "SNR = " + str(round(float(signal_to_noise(jets, axis=None)), 3)), transform=axes.transAxes)
+    axes.text2D(0, 0.85, "Max lum = " + str(round(float(np.max(z)), 3)), transform=axes.transAxes)
 
     pylab.show()
 
