@@ -3,7 +3,6 @@ import numpy as np
 import pylab
 from io import BytesIO
 from PIL import Image
-import matplotlib
 
 from mpl_toolkits.mplot3d import Axes3D
 
