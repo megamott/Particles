@@ -89,20 +89,20 @@ def main():
         x, y, z = make_data(x_range, y_range, lum_arr)
 
         # ----- Show plots! -----
-        fig = pylab.figure()
-        axes = Axes3D(fig)
-
-        axes.plot_surface(x, y, z)
-
-        axes.set_xlabel('X coordinate')
-        axes.set_ylabel('Y coordinate')
-        axes.set_zlabel('Luminance')
-        axes.text2D(0, 0.95, "Luminance for Z = " + str(i), transform=axes.transAxes)
-        axes.text2D(0, 0.90, "SNR = " + str(round(float(signal_to_noise(jets, axis=None)), 3)),
-                    transform=axes.transAxes)
-        axes.text2D(0, 0.85, "Max lum = " + str(round(float(np.max(z)), 3)), transform=axes.transAxes)
-        pylab.show()
-        show_me(jets, 'jets')
+        # fig = pylab.figure()
+        # axes = Axes3D(fig)
+        #
+        # axes.plot_surface(x, y, z)
+        #
+        # axes.set_xlabel('X coordinate')
+        # axes.set_ylabel('Y coordinate')
+        # axes.set_zlabel('Luminance')
+        # axes.text2D(0, 0.95, "Luminance for Z = " + str(i), transform=axes.transAxes)
+        # axes.text2D(0, 0.90, "SNR = " + str(round(float(signal_to_noise(jets, axis=None)), 3)),
+        #             transform=axes.transAxes)
+        # axes.text2D(0, 0.85, "Max lum = " + str(round(float(np.max(z)), 3)), transform=axes.transAxes)
+        # pylab.show()
+        # show_me(jets, 'jets')
 
         max_lum = round(float(np.max(z)), 3)
         max_lum_arr.append(max_lum)
