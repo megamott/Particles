@@ -14,15 +14,16 @@ def show_me(pic, p_name):
     cv2.destroyAllWindows()
 
 
-def save_pic(name_tif, figure):
+def save_pic(name_tif, figure, folder):
     png1 = BytesIO()
     figure.savefig(png1, format='png')
 
     png2 = Image.open(png1)
 
-    png2.save(name_tif + '.tiff')
+    png2.save(folder + "/" + name_tif + '.tiff')
 
 
+# ----- Deprecated -----
 def signal_to_noise(a, axis=0, ddof=0):
     a = np.asanyarray(a)
     m = a.mean(axis)
@@ -40,23 +41,30 @@ def make_data(x_range, y_range, lum_arr):
     return xgrid, ygrid, zgrid
 
 
-def main():
+def main(step, max_range, folder_name):
     i = 0
 
     z_arr = []
     max_lum_arr = []
 
-    while i != 0.0650:
+    while i != max_range:
         i = round(i, 4)
-        name = "I от Z/Z " + str(i) + ".jpg"
+        # Нужно переименовать все скрины в вид без нулей на конце
+        name = folder_name + "/Z " + str(i) + ".jpg"
         z_arr.append(i)
         print(name)
         jets = cv2.imread(name)
 
-        # ----- Different particles -----
+        # ----- Different 2.5mk particles -----
         # jets = jets[250:340, 1210:1300]
         # jets = jets[260:340, 480:580]
         jets = jets[280:360, 760:840]
+
+        # ----- Different 7.17mk particles from 1st measuring -----
+        # jets = jets[170:220, 700:750]
+        # jets = jets[250:350, 350:450] # Nice!
+
+        # Is not necessary
         # lab = cv2.cvtColor(jets, cv2.COLOR_BGR2LAB)
 
         lum_arr = list()
@@ -88,7 +96,7 @@ def main():
 
         x, y, z = make_data(x_range, y_range, lum_arr)
 
-        # ----- Show plots! -----
+        # ----- Show 3D plots! -----
         # fig = pylab.figure()
         # axes = Axes3D(fig)
         #
@@ -109,10 +117,10 @@ def main():
 
         # ------ Save pictures! ------
         # d_name = "Lum/" + "I " + str(i)
-        # save_pic(d_name, fig)
+        # save_pic(d_name, fig, folder = folder_name)
         # cv2.imwrite('Jet_pic_lum/' + 'JI ' + str(i) + '.jpg', jets)
 
-        i += 0.0025
+        i += step
 
         cv2.waitKey(0)
 
@@ -122,4 +130,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # Также в самой функции нужно изменить Roi частицы
+    main(step=0.0025, max_range=0.0625, folder_name="2.5_IZ")
