@@ -40,12 +40,12 @@ def make_2d_plot(cor_array, lum_array, folder=None):
     # plt.ylabel('SNR')
     plt.show()
 
-    calculate_brightness.save_pic('P_Z', fig, folder=folder)
+    # calculate_brightness.save_pic('P_Z', fig, folder=folder)
 
 
 if __name__ == '__main__':
     cor_arr, lum_arr = calculate_brightness.main(step=0.0005, max_range=0.0225, folder_name="7.17_IZ")
-    # make_2d_plot(cor_arr, lum_arr, "7.17_IZ")
+    make_2d_plot(cor_arr, lum_arr, "7.17_IZ")
 
-    cor_arr2, lum_arr2 = calculate_brightness.main(step=0.0025, max_range=0.0625, folder_name="2.5_IZ")
+    # cor_arr2, lum_arr2 = calculate_brightness.main(step=0.0025, max_range=0.0625, folder_name="2.5_IZ")
     # make_2d_plot(cor_arr2, lum_arr2, "2.5_IZ")
