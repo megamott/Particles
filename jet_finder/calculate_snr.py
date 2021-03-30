@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from jetFinder import make_plot
+from jet_finder import make_plot
 
 
 # Use test.py to find area

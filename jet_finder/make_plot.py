@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-from jetFinder import calculate_brightness
+from jet_finder import calculate_brightness
 
 
 def make_2d_plot(cor_array, lum_array, folder=None):
