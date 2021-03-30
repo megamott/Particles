@@ -27,13 +27,7 @@ def rect_1d(x, a=1., w=1., x0=0.):
 
 
 def rayleigh_sommerfeld_multiplier():
-    res = np.exp(1j * k * r) / r
-    res *= (z / r)
-    # res *= (1/1j * wavelength)
-    # res *= (1 / (2 * np.pi * r) + 1 / (1j * wavelength))
-    # res *= ((1/r) - 1j * k)
-    res *= (1 / (2 * np.pi * r) + 1 / (1j * wavelength))
-    return res
+    return (z * np.exp(1j * k * r)) / (np.sqrt(r ** 3) * 1j * np.sqrt(wavelength))
 
 
 def rectangle_rule(field, a, b, nseg=512, frac=0.5):
@@ -83,6 +77,6 @@ for g_, x_ in enumerate(X):
     one_sum = rectangle_rule(result, X[0], X[-1], X.shape[0])
     gZ[g_] = one_sum
 
-plt.plot(X, gZ)
-plt.title(f'RS : {z} m')
-plt.show()
+# plt.plot(X, gZ)
+# plt.title(f'RS : {z} m')
+# plt.show()
